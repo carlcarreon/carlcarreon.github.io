@@ -50,3 +50,30 @@ export const homeIntroParagraphs: HomeParagraphSegment[][] = [
 ]
 
 export const homeSectionTitle = "Tech Stack"
+export const homeProjectsTitle = "Projects"
+
+export const homeTechStack = [
+  "Livewire",
+  "Codex",
+  "Laravel",
+  "Vue.js",
+  "React",
+  "Inertia.js",
+  "Laravel Reverb",
+  "Tailwind CSS",
+  "shadcn/ui",
+  "MySQL",
+  "Git",
+  "GitHub",
+  "Docker",
+  "DigitalOcean",
+  "VS Code",
+  "Linux",
+  "REST APIs",
+  "PHP",
+  "JavaScript",
+  "HTML5",
+  "CSS3",
+]
+
+export const homeTechStackPreviewCount = 8

@@ -113,6 +113,15 @@ select {
   min-height: 100vh;
 }
 
+.react-activity-calendar {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.react-activity-calendar__scroll-container {
+  width: 100%;
+}
+
 @theme inline {
   --font-heading:
     var(--font-sans);

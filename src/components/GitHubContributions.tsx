@@ -14,8 +14,8 @@ export default function GitHubContributions() {
 
       setCalendarSize(
         isSmallScreen
-          ? { blockSize: 5, blockMargin: 1, fontSize: 12 }
-          : { blockSize: 10, blockMargin: 2, fontSize: 14 },
+          ? { blockSize: 8, blockMargin: 1, fontSize: 12 }
+          : { blockSize: 10.7, blockMargin: 2, fontSize: 14 },
       )
     }
 
@@ -26,7 +26,7 @@ export default function GitHubContributions() {
   }, [])
 
   return (
-    <section className="mt-10 w-full max-w-3xl overflow-x-hidden">
+    <section className="py-10 w-full max-w-3xl overflow-x-hidden">
       <GitHubCalendar
         username="carlcarreon"
         blockSize={calendarSize.blockSize}
