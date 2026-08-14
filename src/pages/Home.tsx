@@ -1,5 +1,13 @@
 import GitHubContributions from "../components/GitHubContributions"
 import { Link } from "react-router-dom"
+import { BriefcaseBusiness, FolderOpen } from "lucide-react"
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty"
 import {
   homeIntroParagraphs,
   homeExperienceTitle,
@@ -49,6 +57,18 @@ export default function Home() {
             All Projects
           </Link>
         </div>
+
+        <Empty className="min-h-48 py-10">
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <FolderOpen />
+            </EmptyMedia>
+            <EmptyTitle>Projects coming soon</EmptyTitle>
+            <EmptyDescription>
+              Detailed project case studies are being prepared.
+            </EmptyDescription>
+          </EmptyHeader>
+        </Empty>
       </div>
 
       <div className="w-full max-w-2xl py-10">
@@ -95,6 +115,18 @@ export default function Home() {
             View All
           </Link>
         </div>
+
+        <Empty className="min-h-48 py-10">
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <BriefcaseBusiness />
+            </EmptyMedia>
+            <EmptyTitle>Experience overview</EmptyTitle>
+            <EmptyDescription>
+              View my experience page for roles, responsibilities, and tools.
+            </EmptyDescription>
+          </EmptyHeader>
+        </Empty>
       </div>
 
       <GitHubContributions />
