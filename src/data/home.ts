@@ -8,49 +8,24 @@ export const homeName = "Carl Justin Carreon"
 export const homeIntroParagraphs: HomeParagraphSegment[][] = [
   [
     {
-      text: "I'm a software developer focused on building modern, practical web applications that solve real-world problems and are easy to use.",
+      text: "I’m a full-stack software developer focused on building practical web applications and business systems. I’ve worked on internal and government-related solutions involving document management, workflow automation, filing systems, and automated forms.",
     },
   ],
   [
-    { text: "I've worked on " },
     {
-      text: "student capstone projects, government-related systems, and internal business applications",
-      strong: true,
-    },
-    {
-      text: ", including solutions for document tracking, workflow management, automated forms, and business processes.",
+      text: "I work across frontend and backend development using technologies such as Laravel, React, Vue.js, PHP, MySQL, and PostgreSQL. I also have experience leading development tasks, coordinating work through GitHub, and guiding fellow developers and interns.",
     },
   ],
   [
-    { text: "I also build " },
-    { text: "Progressive Web Apps (PWAs)", strong: true },
-    { text: " using " },
-    { text: "React", strong: true },
-    { text: ", creating responsive applications for desktop and mobile." },
-  ],
-  [
     {
-      text: "I enjoy working across frontend and backend development, turning ideas and requirements into practical, user-friendly applications.",
+      text: "I graduated with a Bachelor of Science in Information Technology, Cum Laude, and received Programmer of the Year and Best Presenter awards.",
     },
-  ],
-  [
-    { text: "I graduated " },
-    {
-      text: "Cum Laude with a Bachelor of Science in Information Technology",
-      strong: true,
-    },
-    {
-      text: " in the Philippines and received the ",
-    },
-    { text: "Programmer of the Year", strong: true },
-    { text: " and " },
-    { text: "Best Presenter", strong: true },
-    { text: " awards before graduating." },
   ],
 ]
 
 export const homeSectionTitle = "Tech Stack"
 export const homeProjectsTitle = "Projects"
+export const homeExperienceTitle = "Experience"
 
 export const homeTechStack = [
   "Livewire",

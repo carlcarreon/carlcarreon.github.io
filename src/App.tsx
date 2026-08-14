@@ -5,6 +5,7 @@ import Layout from "./components/layout/Layout"
 import Home from "./pages/Home"
 import Projects from "./pages/Projects"
 import TechStack from "./pages/TechStack"
+import Experience from "./pages/Experience"
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/tech-stack" element={<TechStack />} />
+          <Route path="/experience" element={<Experience />} />
         </Route>
       </Routes>
     </BrowserRouter>

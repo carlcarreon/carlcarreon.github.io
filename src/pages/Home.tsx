@@ -2,6 +2,7 @@ import GitHubContributions from "../components/GitHubContributions"
 import { Link } from "react-router-dom"
 import {
   homeIntroParagraphs,
+  homeExperienceTitle,
   homeProjectsTitle,
   homeName,
   homeSectionTitle,
@@ -15,16 +16,16 @@ export default function Home() {
 
   return (
     <section className="mx-auto flex min-h-[calc(100vh-6rem)] w-full max-w-2xl flex-col items-start justify-start py-6">
-      <h1 className="m-0 text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] tracking-[-0.06em] text-slate-50">
+      <h1 className="m-0 text-[clamp(2rem,4.5vw,3.75rem)] leading-tight tracking-[0.04em] text-foreground">
         {homeName}
       </h1>
 
-      <div className="max-w-2xl py-10 space-y-5 text-base leading-7 text-white/85 lg:text-lg">
+      <div className="max-w-2xl space-y-5 py-10 text-base leading-7 text-foreground/85 lg:text-base">
         {homeIntroParagraphs.map((paragraph, index) => (
           <p key={index}>
             {paragraph.map((segment, segmentIndex) =>
               segment.strong ? (
-                <span key={segmentIndex} className="font-semibold text-white">
+                <span key={segmentIndex} className="font-semibold text-foreground">
                   {segment.text}
                 </span>
               ) : (
@@ -37,13 +38,13 @@ export default function Home() {
 
       <div className="w-full max-w-2xl py-10">
         <div className="flex items-center justify-between gap-4">
-          <h2 className="text-sm font-medium uppercase tracking-[0.25em] text-zinc-400">
+          <h2 className="text-sm font-medium uppercase tracking-[0.25em] text-muted-foreground">
             {homeProjectsTitle}
           </h2>
 
           <Link
             to="/projects"
-            className="text-sm font-medium text-zinc-500 transition-colors hover:text-white"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             All Projects
           </Link>
@@ -52,13 +53,13 @@ export default function Home() {
 
       <div className="w-full max-w-2xl py-10">
         <div className="flex items-center justify-between gap-4">
-          <h2 className="text-sm font-medium uppercase tracking-[0.25em] text-zinc-400">
+          <h2 className="text-sm font-medium uppercase tracking-[0.25em] text-muted-foreground">
             {homeSectionTitle}
           </h2>
 
           <Link
             to="/tech-stack"
-            className="text-sm font-medium text-zinc-500 transition-colors hover:text-white"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             View All
           </Link>
@@ -68,16 +69,31 @@ export default function Home() {
           {visibleTechStack.map((tech) => (
             <span
               key={tech}
-              className="inline-flex items-center rounded-md border border-white/10 bg-white/5 px-3 py-1 text-sm font-medium text-zinc-200"
+              className="inline-flex items-center rounded-md border border-border bg-muted/50 px-3 py-1 text-sm font-medium text-foreground"
             >
               {tech}
             </span>
           ))}
           {hiddenTechCount > 0 ? (
-            <span className="inline-flex items-center rounded-md border border-white/10 bg-white/5 px-3 py-1 text-sm font-medium text-zinc-200">
+            <span className="inline-flex items-center rounded-md border border-border bg-muted/50 px-3 py-1 text-sm font-medium text-foreground">
               + {hiddenTechCount} more
             </span>
           ) : null}
+        </div>
+      </div>
+
+      <div className="w-full max-w-2xl py-10">
+        <div className="flex items-center justify-between gap-4">
+          <h2 className="text-sm font-medium uppercase tracking-[0.25em] text-muted-foreground">
+            {homeExperienceTitle}
+          </h2>
+
+          <Link
+            to="/experience"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            View All
+          </Link>
         </div>
       </div>
 

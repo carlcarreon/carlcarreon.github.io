@@ -2,6 +2,9 @@ import { useEffect, useState } from "react"
 import { GitHubCalendar } from "react-github-calendar"
 
 export default function GitHubContributions() {
+  const [colorScheme, setColorScheme] = useState<"light" | "dark">(() =>
+    document.documentElement.classList.contains("dark") ? "dark" : "light",
+  )
   const [calendarSize, setCalendarSize] = useState({
     blockSize: 5,
     blockMargin: 1,
@@ -25,6 +28,17 @@ export default function GitHubContributions() {
     return () => window.removeEventListener("resize", updateCalendarSize)
   }, [])
 
+  useEffect(() => {
+    const updateColorScheme = () => {
+      setColorScheme(
+        document.documentElement.classList.contains("dark") ? "dark" : "light",
+      )
+    }
+
+    window.addEventListener("themechange", updateColorScheme)
+    return () => window.removeEventListener("themechange", updateColorScheme)
+  }, [])
+
   return (
     <section className="py-10 w-full max-w-3xl overflow-x-hidden">
       <GitHubCalendar
@@ -32,10 +46,11 @@ export default function GitHubContributions() {
         blockSize={calendarSize.blockSize}
         blockMargin={calendarSize.blockMargin}
         fontSize={calendarSize.fontSize}
-        colorScheme="dark"
+        colorScheme={colorScheme}
         showWeekdayLabels={false}
         showColorLegend={false}
         theme={{
+          light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
           dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
         }}
       />
