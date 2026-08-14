@@ -101,7 +101,7 @@ export default function Sidebar({ isDark, onToggleTheme }: SidebarProps) {
           </a>
         </div>
 
-        <Separator />
+        <Separator className="my-5" />
 
         <div className="flex flex-col gap-3">
           {socialLinks.map(({ label, href, icon: Icon }) => (
