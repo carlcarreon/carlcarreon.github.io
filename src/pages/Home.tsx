@@ -445,7 +445,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="mt-4 flex flex-wrap gap-3">
+        <div className="mt-4 flex flex-wrap gap-2">
           {visibleTechStack.map((tech) => {
             const details = homeTechLinks[tech as keyof typeof homeTechLinks]
             const TechIcon = details.icon
@@ -457,15 +457,15 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`${tech} official website (opens in a new tab)`}
-                className="inline-flex items-center gap-2 rounded-md border border-border bg-muted/50 px-3 py-1 text-sm font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="inline-flex h-auto items-center gap-1.5 rounded-md border border-border bg-muted/50 px-2.5 py-1 font-mono text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <TechIcon aria-hidden="true" className="size-4 shrink-0" />
+                <TechIcon aria-hidden="true" className="size-3 shrink-0" />
                 {tech}
               </a>
             )
           })}
           {hiddenTechCount > 0 ? (
-            <span className="inline-flex items-center rounded-md border border-border bg-muted/50 px-3 py-1 text-sm font-medium text-foreground">
+            <span className="inline-flex h-auto items-center rounded-md border border-border bg-muted/50 px-2.5 py-1 font-mono text-xs text-muted-foreground">
               + {hiddenTechCount} more
             </span>
           ) : null}

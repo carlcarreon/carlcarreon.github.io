@@ -2,12 +2,39 @@ import Step from "@mui/material/Step"
 import StepContent from "@mui/material/StepContent"
 import StepLabel from "@mui/material/StepLabel"
 import Stepper from "@mui/material/Stepper"
+import {
+  SiDocker,
+  SiFlutter,
+  SiGit,
+  SiLaravel,
+  SiLinux,
+  SiMysql,
+  SiPostgresql,
+  SiPwa,
+  SiReact,
+  SiVuedotjs,
+} from "react-icons/si"
+import { TbPlugConnected } from "react-icons/tb"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
   experienceGroups,
   experiencePageDescription,
   experiencePageTitle,
 } from "@/data/experience"
+
+const skillIcons = {
+  Docker: SiDocker,
+  Flutter: SiFlutter,
+  Git: SiGit,
+  Laravel: SiLaravel,
+  Linux: SiLinux,
+  MySQL: SiMysql,
+  PostgreSQL: SiPostgresql,
+  PWA: SiPwa,
+  "React.js": SiReact,
+  "Vue.js": SiVuedotjs,
+  Websocket: TbPlugConnected,
+}
 
 function RoleStepIcon() {
   return (
@@ -139,14 +166,23 @@ export default function Experience() {
 
                       {role.skills.length > 0 ? (
                         <div className="mt-5 flex flex-wrap gap-2">
-                          {role.skills.map((skill) => (
-                            <span
-                              key={skill}
-                              className="rounded-md border border-border bg-muted/50 px-2.5 py-1 font-mono text-xs text-muted-foreground"
-                            >
-                              {skill}
-                            </span>
-                          ))}
+                          {role.skills.map((skill) => {
+                            const SkillIcon =
+                              skillIcons[skill as keyof typeof skillIcons]
+
+                            return (
+                              <span
+                                key={skill}
+                                className="inline-flex items-center gap-1.5 rounded-md border border-border bg-muted/50 px-2.5 py-1 font-mono text-xs text-muted-foreground"
+                              >
+                                <SkillIcon
+                                  aria-hidden="true"
+                                  className="size-3 shrink-0"
+                                />
+                                {skill}
+                              </span>
+                            )
+                          })}
                         </div>
                       ) : null}
                     </StepContent>

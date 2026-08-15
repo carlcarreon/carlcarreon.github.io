@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
 import { Download, Mail, Moon, Sun } from "lucide-react"
-import { buttonVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 
 const brandIconClass = "size-4 shrink-0"
@@ -81,15 +81,16 @@ export default function Sidebar({ isDark, onToggleTheme }: SidebarProps) {
 
       <div className="mt-auto space-y-3">
         <div className="flex gap-2">
-          <button
+          <Button
             type="button"
+            variant="outline"
+            size="icon"
             onClick={onToggleTheme}
             aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
             title={isDark ? "Switch to light theme" : "Switch to dark theme"}
-            className={buttonVariants({ variant: "outline", size: "icon" })}
           >
             {isDark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
-          </button>
+          </Button>
 
           <a
             href="/CV.pdf"
@@ -110,7 +111,7 @@ export default function Sidebar({ isDark, onToggleTheme }: SidebarProps) {
               href={href}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 text-sm text-foreground transition-opacity hover:opacity-75"
+              className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               <Icon />
               {label}
@@ -120,7 +121,7 @@ export default function Sidebar({ isDark, onToggleTheme }: SidebarProps) {
 
         <a
           href="mailto:carreon.carll@gmail.com"
-          className="flex items-center gap-2 text-sm text-foreground transition-opacity hover:opacity-75"
+          className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <Mail className="size-4 shrink-0" aria-hidden="true" />
           carreon.carll@gmail.com
