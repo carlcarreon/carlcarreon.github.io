@@ -2,7 +2,6 @@ import { useState } from "react"
 import GitHubContributions from "../components/GitHubContributions"
 import { Link } from "react-router-dom"
 import {
-  BriefcaseBusiness,
   ChevronLeft,
   ChevronRight,
   ImageIcon,
@@ -14,13 +13,6 @@ import {
   useAnimate,
 } from "motion/react"
 import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from "@/components/ui/empty"
-import {
   homeIntroParagraphs,
   homeExperienceTitle,
   homeProjectsTitle,
@@ -29,7 +21,13 @@ import {
   homeTechStackPreviewCount,
   homeTechStack,
 } from "@/data/home"
+import { experienceGroups } from "@/data/experience"
 import { projects } from "@/data/project"
+
+function getExperienceYears(period: string) {
+  const years = period.match(/\d{4}|Present/g) ?? []
+  return [...new Set(years)].join(" – ")
+}
 
 function HomeProjectSliderContent() {
   const [scope, animate] = useAnimate()
@@ -344,6 +342,11 @@ function HomeProjectSlider() {
 export default function Home() {
   const visibleTechStack = homeTechStack.slice(0, homeTechStackPreviewCount)
   const hiddenTechCount = homeTechStack.length - visibleTechStack.length
+  const visibleExperience = experienceGroups
+    .flatMap((group) =>
+      group.roles.map((role) => ({ ...role, company: group.company })),
+    )
+    .slice(0, 2)
 
   return (
     <section className="mx-auto flex min-h-[calc(100vh-6rem)] w-full max-w-2xl flex-col items-start justify-start py-6">
@@ -429,17 +432,24 @@ export default function Home() {
           </Link>
         </div>
 
-        <Empty className="min-h-48 py-10">
-          <EmptyHeader>
-            <EmptyMedia variant="icon">
-              <BriefcaseBusiness />
-            </EmptyMedia>
-            <EmptyTitle>Experience overview</EmptyTitle>
-            <EmptyDescription>
-              View my experience page for roles, responsibilities, and tools.
-            </EmptyDescription>
-          </EmptyHeader>
-        </Empty>
+        <ul className="mt-6 divide-y divide-border border-y border-border">
+          {visibleExperience.map((role) => (
+            <li
+              key={`${role.title}-${role.period}`}
+              className="grid grid-cols-[7rem_minmax(0,1fr)] items-center gap-x-4 gap-y-1 py-4 sm:grid-cols-[7rem_minmax(0,1fr)_auto]"
+            >
+              <p className="font-mono text-xs whitespace-nowrap text-muted-foreground">
+                {getExperienceYears(role.period)}
+              </p>
+              <p className="min-w-0 text-sm font-medium text-foreground lg:text-base">
+                {role.title}
+              </p>
+              <p className="col-start-2 text-sm text-muted-foreground sm:col-start-auto sm:text-right sm:whitespace-nowrap">
+                {role.company}
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
 
       <GitHubContributions />
