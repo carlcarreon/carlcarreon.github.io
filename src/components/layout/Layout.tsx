@@ -6,7 +6,7 @@ import Sidebar from "./Sidebar"
 export default function Layout() {
   const [isDark, setIsDark] = useState(() => {
     const savedTheme = window.localStorage.getItem("theme")
-    return savedTheme ? savedTheme === "dark" : true
+    return savedTheme ? savedTheme === "dark" : false
   })
   const [isContentHovered, setIsContentHovered] = useState(false)
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
