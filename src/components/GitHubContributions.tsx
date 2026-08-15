@@ -41,19 +41,27 @@ export default function GitHubContributions() {
 
   return (
     <section className="py-10 w-full max-w-3xl overflow-x-hidden">
-      <GitHubCalendar
-        username="carlcarreon"
-        blockSize={calendarSize.blockSize}
-        blockMargin={calendarSize.blockMargin}
-        fontSize={calendarSize.fontSize}
-        colorScheme={colorScheme}
-        showWeekdayLabels={false}
-        showColorLegend={false}
-        theme={{
-          light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
-          dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
-        }}
-      />
+      <a
+        href="https://github.com/carlcarreon"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="View Carl Carreon's GitHub profile"
+        className="block cursor-pointer rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4"
+      >
+        <GitHubCalendar
+          username="carlcarreon"
+          blockSize={calendarSize.blockSize}
+          blockMargin={calendarSize.blockMargin}
+          fontSize={calendarSize.fontSize}
+          colorScheme={colorScheme}
+          showWeekdayLabels={false}
+          showColorLegend={false}
+          theme={{
+            light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
+            dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
+          }}
+        />
+      </a>
     </section>
   )
 }

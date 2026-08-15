@@ -29,10 +29,10 @@ export const homeExperienceTitle = "Experience"
 
 export const homeTechStack = [
   "Livewire",
+  "Vue.js",
+  "React.js",
   "Codex",
   "Laravel",
-  "Vue.js",
-  "React",
   "Inertia.js",
   "Laravel Reverb",
   "Tailwind CSS",

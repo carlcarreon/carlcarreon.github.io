@@ -102,6 +102,26 @@ a {
   text-decoration: none;
 }
 
+@keyframes sidebar-nav-float {
+  from {
+    translate: 0 0;
+  }
+
+  to {
+    translate: 0 -0.375rem;
+  }
+}
+
+@keyframes sidebar-underline-grow {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
 button,
 input,
 textarea,

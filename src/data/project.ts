@@ -39,6 +39,11 @@ export const projects: Project[] = [
         url: "https://spatie.be/docs/laravel-permission",
         icon: "shield",
       },
+      {
+        name: "Google SMTP",
+        url: "https://support.google.com/a/answer/176600",
+        icon: "send",
+      },
     ],
   },
   {
@@ -54,13 +59,13 @@ export const projects: Project[] = [
       { name: "React.js", url: "https://react.dev/", icon: "react" },
       { name: "Laravel", url: "https://laravel.com/docs", icon: "laravel" },
       {
-        name: "IMAP",
-        url: "https://www.rfc-editor.org/rfc/rfc9051",
+        name: "Google IMAP",
+        url: "https://support.google.com/mail/answer/7126229",
         icon: "inbox",
       },
       {
-        name: "SMTP",
-        url: "https://www.rfc-editor.org/rfc/rfc5321",
+        name: "Google SMTP",
+        url: "https://support.google.com/a/answer/176600",
         icon: "send",
       },
       {

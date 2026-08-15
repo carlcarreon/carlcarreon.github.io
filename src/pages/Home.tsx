@@ -50,7 +50,7 @@ const homeTechLinks = {
     url: "https://vuejs.org/",
     icon: SiVuedotjs,
   },
-  React: {
+  "React.js": {
     url: "https://react.dev/",
     icon: SiReact,
   },

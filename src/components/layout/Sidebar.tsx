@@ -37,12 +37,12 @@ const socialLinks = [
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/",
+    href: "https://www.linkedin.com/in/cj-carreon-296173343/",
     icon: LinkedInIcon,
   },
   {
     label: "Facebook",
-    href: "https://www.facebook.com/",
+    href: "https://www.facebook.com/carreon.carll/",
     icon: FacebookIcon,
   },
 ]
@@ -54,10 +54,14 @@ type SidebarProps = {
 
 export default function Sidebar({ isDark, onToggleTheme }: SidebarProps) {
   const navClass = ({ isActive }: { isActive: boolean }) =>
-    `flex py-2 items-center rounded-xl transition-colors ${isActive
-      ? "text-foreground"
+    `relative flex w-fit items-center rounded-xl py-2 transition-colors ${isActive
+      ? "text-foreground after:absolute after:bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:bg-current after:content-[''] after:animate-[sidebar-underline-grow_400ms_ease-out_forwards]"
       : "text-muted-foreground hover:text-foreground"
     }`
+  const navTextClass = (isActive: boolean) =>
+    isActive
+      ? "-translate-y-1.5 animate-[sidebar-nav-float_400ms_ease-out_forwards]"
+      : ""
   return (
     <aside className="fixed inset-y-0 left-0 z-40 hidden w-[232px] flex-col border-r border-border bg-background px-6 pt-10 pb-6 lg:flex">
       <NavLink
@@ -69,13 +73,19 @@ export default function Sidebar({ isDark, onToggleTheme }: SidebarProps) {
 
       <nav className="flex flex-col text-sm">
         <NavLink to="/projects" className={navClass}>
-          Projects
+          {({ isActive }) => (
+            <span className={navTextClass(isActive)}>Projects</span>
+          )}
         </NavLink>
         <NavLink to="/tech-stack" className={navClass}>
-          Tech Stack
+          {({ isActive }) => (
+            <span className={navTextClass(isActive)}>Tech Stack</span>
+          )}
         </NavLink>
         <NavLink to="/experience" className={navClass}>
-          Experience
+          {({ isActive }) => (
+            <span className={navTextClass(isActive)}>Experience</span>
+          )}
         </NavLink>
       </nav>
 
