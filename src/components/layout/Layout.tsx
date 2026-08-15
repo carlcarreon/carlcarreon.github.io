@@ -29,10 +29,13 @@ export default function Layout() {
   return (
     <div className="min-h-screen bg-background text-foreground lg:pl-[232px]">
       <Sidebar isDark={isDark} onToggleTheme={() => setIsDark((value) => !value)} />
-      <MobileNav />
+      <MobileNav
+        isDark={isDark}
+        onToggleTheme={() => setIsDark((value) => !value)}
+      />
 
       <main
-        className="relative min-h-screen overflow-hidden bg-background px-5 py-6 pb-24 lg:px-10 lg:py-10"
+        className="relative min-h-screen overflow-x-hidden bg-background px-5 pb-6 pt-24 lg:px-10 lg:py-10"
         onPointerEnter={(event) => {
           setIsContentHovered(true)
           updateCursorPosition(event)

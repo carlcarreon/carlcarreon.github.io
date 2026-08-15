@@ -490,15 +490,15 @@ export default function Home() {
           {visibleExperience.map((role) => (
             <li
               key={`${role.title}-${role.period}`}
-              className="grid grid-cols-[7rem_minmax(0,1fr)] items-center gap-x-4 gap-y-1 py-4 sm:grid-cols-[7rem_minmax(0,1fr)_auto]"
+              className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1 py-4 sm:grid-cols-[7rem_minmax(0,1fr)_auto]"
             >
-              <p className="font-mono text-xs whitespace-nowrap text-muted-foreground">
+              <p className="col-start-2 row-start-1 text-right font-mono text-xs whitespace-nowrap text-muted-foreground sm:col-start-1 sm:text-left">
                 {getExperienceYears(role.period)}
               </p>
-              <p className="min-w-0 text-sm font-medium text-foreground lg:text-base">
+              <p className="col-start-1 row-start-1 min-w-0 text-sm font-medium text-foreground sm:col-start-2 lg:text-base">
                 {role.title}
               </p>
-              <p className="col-start-2 text-sm text-muted-foreground sm:col-start-auto sm:text-right sm:whitespace-nowrap">
+              <p className="col-start-1 row-start-2 text-sm text-muted-foreground sm:col-start-3 sm:row-start-1 sm:text-right sm:whitespace-nowrap">
                 {role.company}
               </p>
             </li>

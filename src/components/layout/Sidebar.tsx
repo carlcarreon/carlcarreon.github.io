@@ -52,7 +52,11 @@ type SidebarProps = {
   onToggleTheme: () => void
 }
 
-export default function Sidebar({ isDark, onToggleTheme }: SidebarProps) {
+type SidebarNavigationProps = {
+  onNavigate?: () => void
+}
+
+export function SidebarNavigation({ onNavigate }: SidebarNavigationProps) {
   const navClass = ({ isActive }: { isActive: boolean }) =>
     `relative flex w-fit items-center rounded-xl py-2 transition-colors ${isActive
       ? "text-foreground after:absolute after:bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:bg-current after:content-[''] after:animate-[sidebar-underline-grow_400ms_ease-out_forwards]"
@@ -62,6 +66,116 @@ export default function Sidebar({ isDark, onToggleTheme }: SidebarProps) {
     isActive
       ? "-translate-y-1.5 animate-[sidebar-nav-float_400ms_ease-out_forwards]"
       : ""
+
+  return (
+    <nav className="flex flex-col text-sm">
+      <NavLink to="/projects" className={navClass} onClick={onNavigate}>
+        {({ isActive }) => (
+          <span className={navTextClass(isActive)}>Projects</span>
+        )}
+      </NavLink>
+      <NavLink to="/tech-stack" className={navClass} onClick={onNavigate}>
+        {({ isActive }) => (
+          <span className={navTextClass(isActive)}>Tech Stack</span>
+        )}
+      </NavLink>
+      <NavLink to="/experience" className={navClass} onClick={onNavigate}>
+        {({ isActive }) => (
+          <span className={navTextClass(isActive)}>Experience</span>
+        )}
+      </NavLink>
+    </nav>
+  )
+}
+
+export function SidebarActions({ isDark, onToggleTheme }: SidebarProps) {
+  return (
+    <div className="space-y-3">
+      <div className="flex gap-2">
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          onClick={onToggleTheme}
+          aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+          title={isDark ? "Switch to light theme" : "Switch to dark theme"}
+        >
+          {isDark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
+        </Button>
+
+        <a
+          href="/CV.pdf"
+          download="Carl-Justin-Carreon-CV.pdf"
+          className={buttonVariants({ className: "flex-1" })}
+        >
+          <Download data-icon="inline-start" aria-hidden="true" />
+          Download CV
+        </a>
+      </div>
+
+      <Separator className="my-5" />
+
+      <div className="flex flex-col gap-3">
+        {socialLinks.map(({ label, href, icon: Icon }) => (
+          <a
+            key={label}
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Icon />
+            {label}
+          </a>
+        ))}
+      </div>
+
+      <a
+        href="mailto:carreon.carll@gmail.com"
+        className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+      >
+        <Mail className="size-4 shrink-0" aria-hidden="true" />
+        carreon.carll@gmail.com
+      </a>
+    </div>
+  )
+}
+
+type MobileSidebarProps = SidebarProps & {
+  isOpen: boolean
+  onClose: () => void
+}
+
+export function MobileSidebar({
+  isDark,
+  onToggleTheme,
+  isOpen,
+  onClose,
+}: MobileSidebarProps) {
+  return (
+    <aside
+      className={`
+        fixed left-0 right-0 top-16 z-40
+        flex h-[calc(100dvh-4rem)] flex-col
+        bg-background px-6 py-6
+        transition-transform duration-300
+        lg:hidden
+        ${isOpen ? "translate-x-0" : "translate-x-full"}
+      `}
+    >
+      <SidebarNavigation onNavigate={onClose} />
+
+      <div className="mt-auto">
+        <SidebarActions
+          isDark={isDark}
+          onToggleTheme={onToggleTheme}
+        />
+      </div>
+    </aside>
+  )
+}
+
+export default function Sidebar({ isDark, onToggleTheme }: SidebarProps) {
   return (
     <aside className="fixed inset-y-0 left-0 z-40 hidden w-[232px] flex-col border-r border-border bg-background px-6 pt-10 pb-6 lg:flex">
       <NavLink
@@ -71,71 +185,10 @@ export default function Sidebar({ isDark, onToggleTheme }: SidebarProps) {
         Carl Justin Carreon
       </NavLink>
 
-      <nav className="flex flex-col text-sm">
-        <NavLink to="/projects" className={navClass}>
-          {({ isActive }) => (
-            <span className={navTextClass(isActive)}>Projects</span>
-          )}
-        </NavLink>
-        <NavLink to="/tech-stack" className={navClass}>
-          {({ isActive }) => (
-            <span className={navTextClass(isActive)}>Tech Stack</span>
-          )}
-        </NavLink>
-        <NavLink to="/experience" className={navClass}>
-          {({ isActive }) => (
-            <span className={navTextClass(isActive)}>Experience</span>
-          )}
-        </NavLink>
-      </nav>
+      <SidebarNavigation />
 
-      <div className="mt-auto space-y-3">
-        <div className="flex gap-2">
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            onClick={onToggleTheme}
-            aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
-            title={isDark ? "Switch to light theme" : "Switch to dark theme"}
-          >
-            {isDark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
-          </Button>
-
-          <a
-            href="/CV.pdf"
-            download="Carl-Justin-Carreon-CV.pdf"
-            className={buttonVariants({ className: "flex-1" })}
-          >
-            <Download data-icon="inline-start" aria-hidden="true" />
-            Download CV
-          </a>
-        </div>
-
-        <Separator className="my-5" />
-
-        <div className="flex flex-col gap-3">
-          {socialLinks.map(({ label, href, icon: Icon }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <Icon />
-              {label}
-            </a>
-          ))}
-        </div>
-
-        <a
-          href="mailto:carreon.carll@gmail.com"
-          className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-        >
-          <Mail className="size-4 shrink-0" aria-hidden="true" />
-          carreon.carll@gmail.com
-        </a>
+      <div className="mt-auto">
+        <SidebarActions isDark={isDark} onToggleTheme={onToggleTheme} />
       </div>
     </aside>
   )
