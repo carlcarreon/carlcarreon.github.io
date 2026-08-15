@@ -12,6 +12,15 @@ import {
   MotionConfig,
   useAnimate,
 } from "motion/react"
+import { BsOpenai } from "react-icons/bs"
+import {
+  SiInertia,
+  SiLaravel,
+  SiLivewire,
+  SiReact,
+  SiTailwindcss,
+  SiVuedotjs,
+} from "react-icons/si"
 import {
   homeIntroParagraphs,
   homeExperienceTitle,
@@ -23,6 +32,41 @@ import {
 } from "@/data/home"
 import { experienceGroups } from "@/data/experience"
 import { projects } from "@/data/project"
+
+const homeTechLinks = {
+  Livewire: {
+    url: "https://livewire.laravel.com/",
+    icon: SiLivewire,
+  },
+  Codex: {
+    url: "https://developers.openai.com/codex/",
+    icon: BsOpenai,
+  },
+  Laravel: {
+    url: "https://laravel.com/",
+    icon: SiLaravel,
+  },
+  "Vue.js": {
+    url: "https://vuejs.org/",
+    icon: SiVuedotjs,
+  },
+  React: {
+    url: "https://react.dev/",
+    icon: SiReact,
+  },
+  "Inertia.js": {
+    url: "https://inertiajs.com/",
+    icon: SiInertia,
+  },
+  "Laravel Reverb": {
+    url: "https://laravel.com/docs/reverb",
+    icon: SiLaravel,
+  },
+  "Tailwind CSS": {
+    url: "https://tailwindcss.com/",
+    icon: SiTailwindcss,
+  },
+}
 
 function getExperienceYears(period: string) {
   const years = period.match(/\d{4}|Present/g) ?? []
@@ -402,14 +446,24 @@ export default function Home() {
         </div>
 
         <div className="mt-4 flex flex-wrap gap-3">
-          {visibleTechStack.map((tech) => (
-            <span
-              key={tech}
-              className="inline-flex items-center rounded-md border border-border bg-muted/50 px-3 py-1 text-sm font-medium text-foreground"
-            >
-              {tech}
-            </span>
-          ))}
+          {visibleTechStack.map((tech) => {
+            const details = homeTechLinks[tech as keyof typeof homeTechLinks]
+            const TechIcon = details.icon
+
+            return (
+              <a
+                key={tech}
+                href={details.url}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${tech} official website (opens in a new tab)`}
+                className="inline-flex items-center gap-2 rounded-md border border-border bg-muted/50 px-3 py-1 text-sm font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <TechIcon aria-hidden="true" className="size-4 shrink-0" />
+                {tech}
+              </a>
+            )
+          })}
           {hiddenTechCount > 0 ? (
             <span className="inline-flex items-center rounded-md border border-border bg-muted/50 px-3 py-1 text-sm font-medium text-foreground">
               + {hiddenTechCount} more
