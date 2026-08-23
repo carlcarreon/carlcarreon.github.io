@@ -1,6 +1,7 @@
 export type TechStackIcon =
   | "codex"
   | "css"
+  | "csharp"
   | "digitalocean"
   | "docker"
   | "git"
@@ -20,6 +21,7 @@ export type TechStackIcon =
   | "railway"
   | "react"
   | "rest"
+  | "aspnet"
   | "shadcn"
   | "supabase"
   | "tailwind"
@@ -87,6 +89,8 @@ export const techStackCategories: TechStackCategory[] = [
         url: "https://laravel.com/docs/reverb",
         icon: "laravel",
       },
+      { name: "C#", url: "https://learn.microsoft.com/dotnet/csharp/", icon: "csharp" },
+      { name: "ASP.NET", url: "https://dotnet.microsoft.com/apps/aspnet", icon: "aspnet" },
       { name: "PHP", url: "https://www.php.net/", icon: "php" },
       { name: "MySQL", url: "https://www.mysql.com/", icon: "mysql" },
       {

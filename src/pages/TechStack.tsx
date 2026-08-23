@@ -1,5 +1,6 @@
 import { BsOpenai } from "react-icons/bs"
 import {
+  SiDotnet,
   SiCss,
   SiDigitalocean,
   SiDocker,
@@ -26,6 +27,7 @@ import {
   SiVuedotjs,
 } from "react-icons/si"
 import { TbApi } from "react-icons/tb"
+import { TbBrandCSharp } from "react-icons/tb"
 import { VscVscode } from "react-icons/vsc"
 
 import { Badge } from "@/components/ui/badge"
@@ -36,6 +38,7 @@ import {
 
 const techStackIcons = {
   codex: BsOpenai,
+  csharp: TbBrandCSharp,
   css: SiCss,
   digitalocean: SiDigitalocean,
   docker: SiDocker,
@@ -56,6 +59,7 @@ const techStackIcons = {
   railway: SiRailway,
   react: SiReact,
   rest: TbApi,
+  aspnet: SiDotnet,
   shadcn: SiShadcnui,
   supabase: SiSupabase,
   tailwind: SiTailwindcss,

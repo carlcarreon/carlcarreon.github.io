@@ -9,19 +9,37 @@ import {
 } from "lucide-react"
 import { motion, MotionConfig, useAnimate } from "motion/react"
 import { FaAws } from "react-icons/fa"
-import { SiLaravel, SiReact, SiVuedotjs } from "react-icons/si"
+import {
+  SiAlpinedotjs,
+  SiDigitalocean,
+  SiDocker,
+  SiFlutter,
+  SiLaravel,
+  SiLivewire,
+  SiReact,
+  SiVuedotjs,
+} from "react-icons/si"
+import { TbFileTypePdf } from "react-icons/tb"
+import { RiFileScanLine } from "react-icons/ri"
 
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { projects } from "@/data/project"
 
 const technologyIcons = {
+  alpine: SiAlpinedotjs,
   aws: FaAws,
+  digitalocean: SiDigitalocean,
+  docker: SiDocker,
+  flutter: SiFlutter,
   inbox: Inbox,
   laravel: SiLaravel,
+  livewire: SiLivewire,
+  pdf: TbFileTypePdf,
   react: SiReact,
   send: Send,
   shield: ShieldCheck,
+  scan: RiFileScanLine,
   vue: SiVuedotjs,
 }
 
@@ -31,14 +49,22 @@ type ProjectImageStackProps = {
 }
 
 function ProjectImageStack({ name, images }: ProjectImageStackProps) {
-  const cards: Array<string | null> =
-    images.length > 0 ? images : [null, null]
+  const noImages = images.length === 0
+  const cards = noImages ? [null] : images
   const [scope, animate] = useAnimate()
   const [cardOrder, setCardOrder] = useState(() =>
     cards.map((_, index) => index),
   )
   const [isAnimating, setIsAnimating] = useState(false)
   const offsetStep = cards.length > 1 ? 64 / (cards.length - 1) : 0
+
+  if (noImages) {
+    return (
+      <div className="mb-10 mt-6 flex aspect-video w-full items-center justify-center border border-dashed border-border bg-muted/30 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+        No image yet
+      </div>
+    )
+  }
 
   async function bringCardForward(card: number) {
     if (card === cardOrder[0] || isAnimating) return
@@ -201,39 +227,43 @@ export default function Projects() {
                 images={project.images}
               />
 
-              <Separator />
+              {project.stack.length > 0 ? (
+                <>
+                  <Separator />
 
-              <section className="py-4" aria-label="Technology stack">
-                <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                  Built with
-                </p>
-                <ul className="mt-3 flex list-none flex-wrap gap-2">
-                  {project.stack.map((technology) => {
-                    const TechnologyIcon = technologyIcons[technology.icon]
+                  <section className="py-4" aria-label="Technology stack">
+                    <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                      Built with
+                    </p>
+                    <ul className="mt-3 flex list-none flex-wrap gap-2">
+                      {project.stack.map((technology) => {
+                        const TechnologyIcon = technologyIcons[technology.icon]
 
-                    return (
-                      <li key={technology.name}>
-                        <a
-                          href={technology.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          aria-label={`${technology.name} official documentation (opens in a new tab)`}
-                        >
-                          <Badge
-                            variant="outline"
-                            className="h-auto rounded-md bg-muted/50 px-2.5 py-1 font-mono text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                          >
-                            <TechnologyIcon aria-hidden="true" />
-                            {technology.name}
-                          </Badge>
-                        </a>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </section>
+                        return (
+                          <li key={technology.name}>
+                            <a
+                              href={technology.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              aria-label={`${technology.name} official documentation (opens in a new tab)`}
+                            >
+                              <Badge
+                                variant="outline"
+                                className="h-auto rounded-md bg-muted/50 px-2.5 py-1 font-mono text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                              >
+                                <TechnologyIcon aria-hidden="true" />
+                                {technology.name}
+                              </Badge>
+                            </a>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </section>
 
-              <Separator />
+                  <Separator />
+                </>
+              ) : null}
             </div>
           ))}
         </article>

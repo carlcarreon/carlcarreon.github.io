@@ -322,7 +322,7 @@ function HomeProjectSliderContent() {
               ) : (
                 <span className="mt-6 flex aspect-video w-full flex-col items-center justify-center gap-3 border border-dashed border-border bg-muted/50 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
                   <ImageIcon aria-hidden="true" className="size-6" />
-                  Image placeholder
+                  No image yet
                 </span>
               )}
 
