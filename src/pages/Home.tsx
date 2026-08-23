@@ -377,7 +377,7 @@ function HomeProjectSliderContent() {
 
 function HomeProjectSlider() {
   return (
-    <MotionConfig reducedMotion={import.meta.env.PROD ? "user" : "never"}>
+    <MotionConfig reducedMotion="never">
       <HomeProjectSliderContent />
     </MotionConfig>
   )

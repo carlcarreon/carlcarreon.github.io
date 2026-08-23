@@ -203,7 +203,7 @@ function ProjectImageStack({ name, images }: ProjectImageStackProps) {
 
 export default function Projects() {
   return (
-    <MotionConfig reducedMotion={import.meta.env.PROD ? "user" : "never"}>
+    <MotionConfig reducedMotion="never">
       <main className="mx-auto min-h-[calc(100vh-6rem)] w-full max-w-3xl">
         <header className="flex flex-col gap-4 pb-10">
           <h1 className="m-0 text-3xl text-foreground">Projects</h1>
