@@ -8,6 +8,7 @@ const Home = lazy(() => import("./pages/Home"))
 const Projects = lazy(() => import("./pages/Projects"))
 const TechStack = lazy(() => import("./pages/TechStack"))
 const Experience = lazy(() => import("./pages/Experience"))
+const NotFound = lazy(() => import("./pages/NotFound"))
 
 function PageSkeleton({ wide = false }: { wide?: boolean }) {
   return (
@@ -78,6 +79,14 @@ function App() {
             element={
               <PageBoundary>
                 <Experience />
+              </PageBoundary>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <PageBoundary>
+                <NotFound />
               </PageBoundary>
             }
           />
