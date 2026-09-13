@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { Download, Mail, Moon, Sun } from "lucide-react"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -47,6 +48,22 @@ const socialLinks = [
   },
 ]
 
+let visitCountRequest: Promise<string | null> | undefined
+
+function getVisitCount() {
+  if (!visitCountRequest) {
+    visitCountRequest = fetch("https://capi.goatcounter.com/counter/TOTAL.json")
+      .then((response) => {
+        if (!response.ok) throw new Error("Visit count unavailable")
+        return response.json() as Promise<{ count?: unknown }>
+      })
+      .then((data) => (typeof data.count === "string" ? data.count : null))
+      .catch(() => null)
+  }
+
+  return visitCountRequest
+}
+
 type SidebarProps = {
   isDark: boolean
   onToggleTheme: () => void
@@ -89,6 +106,18 @@ export function SidebarNavigation({ onNavigate }: SidebarNavigationProps) {
 }
 
 export function SidebarActions({ isDark, onToggleTheme }: SidebarProps) {
+  const [visitCount, setVisitCount] = useState<string | null>(null)
+
+  useEffect(() => {
+    let active = true
+    void getVisitCount().then((count) => {
+      if (active) setVisitCount(count)
+    })
+    return () => {
+      active = false
+    }
+  }, [])
+
   return (
     <div className="space-y-3">
       <div className="flex gap-2">
@@ -137,6 +166,11 @@ export function SidebarActions({ isDark, onToggleTheme }: SidebarProps) {
         <Mail className="size-4 shrink-0" aria-hidden="true" />
         carreon.carll@gmail.com
       </a>
+      {visitCount !== null && (
+        <p className="text-xs text-muted-foreground" aria-label={`${visitCount} site visits`}>
+          {visitCount} site visits
+        </p>
+      )}
     </div>
   )
 }

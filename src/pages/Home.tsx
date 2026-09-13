@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import GitHubContributions from "../components/GitHubContributions"
 import { Link } from "react-router-dom"
 import {
@@ -75,6 +75,7 @@ function getExperienceYears(period: string) {
 
 function HomeProjectSliderContent() {
   const [scope, animate] = useAnimate()
+  const transitionInProgress = useRef(false)
   const [cardOrder, setCardOrder] = useState(() =>
     projects.map((_, index) => index),
   )
@@ -107,7 +108,7 @@ function HomeProjectSliderContent() {
   }
 
   async function showNextProject() {
-    if (projects.length < 2 || isAnimating) return
+    if (projects.length < 2 || transitionInProgress.current) return
 
     const outgoingCard = `[data-home-project-card="${cardOrder[0]}"]`
     const previousCardIndex = cardOrder[cardOrder.length - 1]
@@ -117,6 +118,7 @@ function HomeProjectSliderContent() {
       ? cardOrder.slice(1, -1)
       : cardOrder.slice(1)
 
+    transitionInProgress.current = true
     setIsAnimating(true)
 
     try {
@@ -184,17 +186,19 @@ function HomeProjectSliderContent() {
         )
       }
     } finally {
+      transitionInProgress.current = false
       setIsAnimating(false)
     }
   }
 
   async function showPreviousProject() {
-    if (projects.length < 2 || isAnimating) return
+    if (projects.length < 2 || transitionInProgress.current) return
 
     const previousCardIndex = cardOrder[cardOrder.length - 1]
     const previousCard = `[data-home-project-card="${previousCardIndex}"]`
     const nextOrder = [previousCardIndex, ...cardOrder.slice(0, -1)]
 
+    transitionInProgress.current = true
     setIsAnimating(true)
 
     try {
@@ -248,7 +252,31 @@ function HomeProjectSliderContent() {
         )
       }
     } finally {
+      transitionInProgress.current = false
       setIsAnimating(false)
+    }
+  }
+
+  async function handleCardDragEnd(card: number, offsetX: number) {
+    if (transitionInProgress.current) return
+
+    if (offsetX <= -80) {
+      await showNextProject()
+    } else if (offsetX >= 80) {
+      await showPreviousProject()
+    } else {
+      transitionInProgress.current = true
+      setIsAnimating(true)
+      try {
+        await animate(
+          `[data-home-project-card="${card}"]`,
+          { x: 0 },
+          { duration: 0.25, ease: "easeOut" },
+        )
+      } finally {
+        transitionInProgress.current = false
+        setIsAnimating(false)
+      }
     }
   }
 
@@ -269,11 +297,18 @@ function HomeProjectSliderContent() {
               key={project.name}
               data-home-project-card={card}
               aria-current={isFront ? "true" : undefined}
+              drag={isFront && !isAnimating && projects.length > 1 ? "x" : false}
+              dragConstraints={{ left: -140, right: 140 }}
+              dragElastic={0}
+              dragMomentum={false}
+              onDragEnd={(_, info) => {
+                if (isFront) void handleCardDragEnd(card, info.offset.x)
+              }}
               initial={{
                 x: getCardOffset(visiblePosition),
                 y: 0,
               }}
-              className={`relative col-start-1 row-start-1 flex flex-col border border-border p-6 text-left ${hasSeparatePreviousCard ? "ml-16 w-[calc(100%-8rem)] sm:ml-[16.666%] sm:w-2/3" : "w-[calc(100%-5rem)] sm:w-[calc(66.666%-1rem)]"} ${isFront ? "bg-card shadow-xl" : isNext || isPrevious ? "bg-muted hover:brightness-95 dark:hover:brightness-110" : "bg-muted"}`}
+              className={`relative col-start-1 row-start-1 flex flex-col border border-border p-6 text-left ${hasSeparatePreviousCard ? "ml-16 w-[calc(100%-8rem)] sm:ml-[16.666%] sm:w-2/3" : "w-[calc(100%-5rem)] sm:w-[calc(66.666%-1rem)]"} ${isFront ? "bg-card shadow-xl touch-pan-y cursor-grab active:cursor-grabbing" : isNext || isPrevious ? "bg-muted hover:brightness-95 dark:hover:brightness-110" : "bg-muted"}`}
             >
               <span className="text-xl font-semibold tracking-[-0.025em] text-foreground">
                 {project.name}
@@ -287,6 +322,7 @@ function HomeProjectSliderContent() {
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.img
                       key={activeImage}
+                      draggable={false}
                       src={activeImage}
                       alt={`${project.name} screenshot ${imageIndexes[card] + 1}`}
                       initial={{ opacity: 0 }}
@@ -302,6 +338,7 @@ function HomeProjectSliderContent() {
                       <button
                         type="button"
                         aria-label={`Show previous ${project.name} image`}
+                        onPointerDown={(event) => event.stopPropagation()}
                         onClick={() => changeProjectImage(card, -1)}
                         className="absolute left-2 top-1/2 z-10 -translate-y-1/2 bg-black/65 p-1.5 text-white opacity-0 transition-opacity group-hover/image:opacity-100 focus-visible:opacity-100"
                       >
@@ -311,6 +348,7 @@ function HomeProjectSliderContent() {
                       <button
                         type="button"
                         aria-label={`Show next ${project.name} image`}
+                        onPointerDown={(event) => event.stopPropagation()}
                         onClick={() => changeProjectImage(card, 1)}
                         className="absolute right-2 top-1/2 z-10 -translate-y-1/2 bg-black/65 p-1.5 text-white opacity-0 transition-opacity group-hover/image:opacity-100 focus-visible:opacity-100"
                       >

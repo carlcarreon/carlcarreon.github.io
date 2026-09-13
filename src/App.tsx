@@ -10,6 +10,34 @@ const TechStack = lazy(() => import("./pages/TechStack"))
 const Experience = lazy(() => import("./pages/Experience"))
 const NotFound = lazy(() => import("./pages/NotFound"))
 
+declare global {
+  interface Window {
+    goatcounter?: {
+      no_onload?: boolean
+      count?: (options: { path: string }) => void
+    }
+  }
+}
+
+let goatCounterReady: Promise<void> | undefined
+
+function loadGoatCounter() {
+  if (!goatCounterReady) {
+    window.goatcounter = { no_onload: true }
+    goatCounterReady = new Promise<void>((resolve, reject) => {
+      const script = document.createElement("script")
+      script.src = "https://gc.zgo.at/count.js"
+      script.dataset.goatcounter = "https://capi.goatcounter.com/count"
+      script.async = true
+      script.onload = () => resolve()
+      script.onerror = () => reject(new Error("GoatCounter could not load"))
+      document.head.appendChild(script)
+    })
+  }
+
+  return goatCounterReady
+}
+
 function PageSkeleton({ wide = false }: { wide?: boolean }) {
   return (
     <div
@@ -55,10 +83,33 @@ function ScrollToTop() {
   return null
 }
 
+function TrackVisits() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    let active = true
+
+    void loadGoatCounter()
+      .then(() => {
+        if (active) window.goatcounter?.count?.({ path: pathname })
+      })
+      .catch(() => {
+        // A blocked analytics script should not affect navigation.
+      })
+
+    return () => {
+      active = false
+    }
+  }, [pathname])
+
+  return null
+}
+
 function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <TrackVisits />
       <Routes>
         <Route element={<Layout />}>
           <Route
