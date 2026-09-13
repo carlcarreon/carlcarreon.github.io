@@ -145,6 +145,9 @@ export function SidebarActions({ isDark, onToggleTheme }: SidebarProps) {
       <Separator className="my-5" />
 
       <div className="flex flex-col gap-3">
+        <p className="text-xs text-muted-foreground" aria-live="polite">
+          Site visits: {visitCount ?? "—"}
+        </p>
         {socialLinks.map(({ label, href, icon: Icon }) => (
           <a
             key={label}
@@ -166,11 +169,6 @@ export function SidebarActions({ isDark, onToggleTheme }: SidebarProps) {
         <Mail className="size-4 shrink-0" aria-hidden="true" />
         carreon.carll@gmail.com
       </a>
-      {visitCount !== null && (
-        <p className="text-xs text-muted-foreground" aria-label={`${visitCount} site visits`}>
-          {visitCount} site visits
-        </p>
-      )}
     </div>
   )
 }
