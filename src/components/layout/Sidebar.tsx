@@ -145,9 +145,11 @@ export function SidebarActions({ isDark, onToggleTheme }: SidebarProps) {
       <Separator className="my-5" />
 
       <div className="flex flex-col gap-3">
-        <p className="text-xs text-muted-foreground" aria-live="polite">
-          Site visits: {visitCount ?? "—"}
-        </p>
+        {visitCount !== null && visitCount !== "0" && (
+          <p className="text-xs text-muted-foreground" aria-live="polite">
+            Site visits: {visitCount}
+          </p>
+        )}
         {socialLinks.map(({ label, href, icon: Icon }) => (
           <a
             key={label}
