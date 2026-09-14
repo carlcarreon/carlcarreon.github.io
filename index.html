@@ -3,17 +3,25 @@
   <head>
     <meta charset="UTF-8" />
 
-    <link rel="icon" type="image/jpeg" href="%BASE_URL%favicon-photo.jpg" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/jpeg"
+      href="%BASE_URL%favicon-photo.jpg"
+    />
+
+    <!-- Google Search Console Verification -->
     <meta
       name="google-site-verification"
       content="JVTXffphz3-cScGs4BlYB23zjTneCgvf_eQAg04ejcA"
     />
 
+    <!-- Page Title -->
     <title>Carl Justin Carreon — Full Stack Software Developer</title>
 
+    <!-- SEO Description -->
     <meta
       name="description"
       content="Carl Justin Carreon is a Full Stack Software Developer building web applications with Laravel, React, Vue.js, PHP, and PostgreSQL. Explore his full-stack software development work."
@@ -21,35 +29,77 @@
 
     <meta name="robots" content="index, follow" />
 
+    <!-- Canonical URL -->
     <link
       rel="canonical"
       href="https://carlcarreon.github.io/"
     />
 
-    <meta property="og:title" content="Carl Justin Carreon — Full Stack Software Developer" />
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Carl Justin Carreon" />
+
+    <meta
+      property="og:title"
+      content="Carl Justin Carreon — Full Stack Software Developer"
+    />
+
     <meta
       property="og:description"
       content="Carl Justin Carreon is a Full Stack Software Developer building web applications with Laravel, React, Vue.js, PHP, and PostgreSQL. Explore his full-stack software development work."
     />
-    <meta property="og:url" content="https://carlcarreon.github.io/" />
+
+    <meta
+      property="og:url"
+      content="https://carlcarreon.github.io/"
+    />
+
     <meta property="og:type" content="website" />
+
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Carl Justin Carreon — Full Stack Software Developer" />
+
+    <meta
+      name="twitter:title"
+      content="Carl Justin Carreon — Full Stack Software Developer"
+    />
+
     <meta
       name="twitter:description"
       content="Carl Justin Carreon is a Full Stack Software Developer building web applications with Laravel, React, Vue.js, PHP, and PostgreSQL. Explore his full-stack software development work."
     />
+
+    <!-- Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Carl Justin Carreon",
-        "url": "https://carlcarreon.github.io/",
-        "jobTitle": "Full Stack Software Developer",
-        "knowsAbout": ["Laravel", "React", "Vue.js", "PHP", "PostgreSQL", "JavaScript", "web development"],
-        "sameAs": [
-          "https://github.com/carlcarreon",
-          "https://www.linkedin.com/in/cj-carreon-296173343/"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://carlcarreon.github.io/#website",
+            "url": "https://carlcarreon.github.io/",
+            "name": "Carl Justin Carreon",
+            "alternateName": "Carl Carreon"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://carlcarreon.github.io/#person",
+            "name": "Carl Justin Carreon",
+            "url": "https://carlcarreon.github.io/",
+            "jobTitle": "Full Stack Software Developer",
+            "knowsAbout": [
+              "Laravel",
+              "React",
+              "Vue.js",
+              "PHP",
+              "PostgreSQL",
+              "JavaScript",
+              "Web Development"
+            ],
+            "sameAs": [
+              "https://github.com/carlcarreon",
+              "https://www.linkedin.com/in/cj-carreon-296173343/"
+            ]
+          }
         ]
       }
     </script>
@@ -57,6 +107,10 @@
 
   <body>
     <div id="root"></div>
-    <script type="module" src="%BASE_URL%src/main.tsx"></script>
+
+    <script
+      type="module"
+      src="%BASE_URL%src/main.tsx"
+    ></script>
   </body>
 </html>
