@@ -16,11 +16,13 @@ export const homeIntroParagraphs: HomeParagraphSegment[][] = [
       text: "I work across frontend and backend development using technologies such as Laravel, React, Vue.js, PHP, MySQL, and PostgreSQL. I also have experience leading development tasks, coordinating work through GitHub, and guiding fellow developers and interns.",
     },
   ],
+
   [
     {
-      text: "I graduated with a Bachelor of Science in Information Technology, Cum Laude, and received Programmer of the Year and Best Presenter awards.",
+      text: "I graduated with a Bachelor of Science in Information Technology from Pampanga State University (formerly Don Honorio Ventura State University), earning Cum Laude honors. I also received Programmer of the Year and Best Presenter awards.",
     },
   ],
+
 ]
 
 export const homeSectionTitle = "Tech Stack"
