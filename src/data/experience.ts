@@ -1,37 +1,17 @@
-export type ExperienceRole = {
-  title: string
-  period: string
-  duration: string
-  responsibilities: string[]
-  skills: string[]
-}
-
-export type ExperienceGroup = {
-  company: string
-  employmentType: string
-  totalDuration: string
-  location: string
-  roles: ExperienceRole[]
-}
-
-export const experiencePageTitle = "Experience"
-
-export const experiencePageDescription =
-  "Developing practical software systems focused on workflow automation, document management, business processes, and improving day-to-day operations through simple and reliable solutions."
 
 export const experienceGroups: ExperienceGroup[] = [
   {
     company: "The Firm Consultant Inc",
     employmentType: "Full-time",
-    totalDuration: "8 mos",
+    totalDuration: "10 mos",
     location: "San Juan Nepomuceno, Guagua, Philippines",
     roles: [
       {
         title: "Full Stack Software Developer",
-        period: "April 2026 – Present",
-        duration: "5 mos",
+        period: "April 2026 – October 2026",
+        duration: "7 mos",
         responsibilities: [
-          "Develop and lead full-stack business and government-related systems from planning through implementation. Coordinate project requirements, guide interns, manage development tasks, and contribute directly to frontend and backend development. Projects include document tracking, PDF document indexing and merging, quarterly BIR filing, tax-client billing, and workflow automation.",
+          "Developed and led full-stack business and government-related systems from planning through implementation. Coordinated project requirements, guided interns, managed development tasks, and contributed directly to frontend and backend development. Projects included document tracking, PDF document indexing and merging, quarterly BIR filing, tax-client billing, and workflow automation.",
         ],
         skills: [
           "Laravel",
@@ -45,7 +25,7 @@ export const experienceGroups: ExperienceGroup[] = [
           "MySQL",
           "Websocket",
           "PostgreSQL",
-        ]
+        ],
       },
       {
         title: "Full Stack Software Developer Intern",
