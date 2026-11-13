@@ -1,3 +1,24 @@
+export type ExperienceRole = {
+  title: string
+  period: string
+  duration: string
+  responsibilities: string[]
+  skills: string[]
+}
+
+export type ExperienceGroup = {
+  company: string
+  employmentType: string
+  totalDuration: string
+  location: string
+  roles: ExperienceRole[]
+}
+
+export const experiencePageTitle = "Experience"
+
+export const experiencePageDescription =
+  "Developing practical software systems focused on workflow automation, document management, business processes, and improving day-to-day operations through simple and reliable solutions."
+
 
 export const experienceGroups: ExperienceGroup[] = [
   {
